@@ -114,7 +114,15 @@ public abstract class World implements IBlockAccess {
     public CraftServer getServer() {
         return (CraftServer) Bukkit.getServer();
     }
-
+    
+    public World() {
+    	this.world = null;
+    	this.villages = null;
+    	this.methodProfiler = null;
+    	this.dataManager = null;
+    	//FakeConstructorYOLO
+    }
+    
     // Changed signature - added gen and env
     public World(IDataManager idatamanager, String s, WorldSettings worldsettings, WorldProvider worldprovider, MethodProfiler methodprofiler, ChunkGenerator gen, org.bukkit.World.Environment env) {
         this.generator = gen;
