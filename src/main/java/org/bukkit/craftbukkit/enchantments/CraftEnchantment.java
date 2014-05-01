@@ -1,5 +1,9 @@
 package org.bukkit.craftbukkit.enchantments;
 
+import java.util.HashMap;
+
+import net.minecraft.server.EnchantmentSlotType;
+
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
@@ -8,10 +12,55 @@ import org.bukkit.inventory.ItemStack;
 
 public class CraftEnchantment extends Enchantment {
     private final net.minecraft.server.Enchantment target;
+    private final HashMap<Integer, String> enchantName = new HashMap<Integer, String>();
+    private final HashMap<EnchantmentSlotType, EnchantmentTarget> enchantType = new HashMap<EnchantmentSlotType, EnchantmentTarget>();
 
     public CraftEnchantment(net.minecraft.server.Enchantment target) {
         super(target.id);
         this.target = target;
+        generateEnchantName();
+        generateEnchantType();
+    }
+    
+    private void generateEnchantName() {
+    	enchantName.put(0, "PROTECTION_ENVIRONMENTAL");
+    	enchantName.put(1, "PROTECTION_FIRE");
+    	enchantName.put(2, "PROTECTION_FALL");
+    	enchantName.put(3, "PROTECTION_EXPLOSIONS");
+    	enchantName.put(4, "PROTECTION_PROJECTILE");
+    	enchantName.put(5, "OXYGEN");
+    	enchantName.put(6, "WATER_WORKER");
+    	enchantName.put(7, "THORNS");
+    	enchantName.put(16, "DAMAGE_ALL");
+    	enchantName.put(17, "DAMAGE_UNDEAD");
+    	enchantName.put(18, "DAMAGE_ARTHROPODS");
+    	enchantName.put(19, "KNOCKBACK");
+    	enchantName.put(20, "FIRE_ASPECT");
+    	enchantName.put(21, "LOOT_BONUS_MOBS");
+    	enchantName.put(32, "DIG_SPEED");
+    	enchantName.put(33, "SILK_TOUCH");
+    	enchantName.put(34, "DURABILITY");
+    	enchantName.put(35, "LOOT_BONUS_BLOCKS");
+    	enchantName.put(48, "ARROW_DAMAGE");
+    	enchantName.put(49, "ARROW_KNOCKBACK");
+    	enchantName.put(50, "ARROW_FIRE");
+    	enchantName.put(51, "ARROW_INFINITE");
+    	enchantName.put(61, "LUCK");
+    	enchantName.put(62, "LURE");
+
+    }
+    
+    private void generateEnchantType() {
+    	enchantType.put(EnchantmentSlotType.ALL, EnchantmentTarget.ALL);
+    	enchantType.put(EnchantmentSlotType.ARMOR, EnchantmentTarget.ARMOR);
+    	enchantType.put(EnchantmentSlotType.ARMOR_FEET, EnchantmentTarget.ARMOR_FEET);
+    	enchantType.put(EnchantmentSlotType.ARMOR_HEAD, EnchantmentTarget.ARMOR_HEAD);
+    	enchantType.put(EnchantmentSlotType.ARMOR_LEGS, EnchantmentTarget.ARMOR_LEGS);
+    	enchantType.put(EnchantmentSlotType.ARMOR_TORSO, EnchantmentTarget.ARMOR_TORSO);
+    	enchantType.put(EnchantmentSlotType.DIGGER, EnchantmentTarget.TOOL);
+    	enchantType.put(EnchantmentSlotType.WEAPON, EnchantmentTarget.WEAPON);
+    	enchantType.put(EnchantmentSlotType.BOW, EnchantmentTarget.BOW);
+    	enchantType.put(EnchantmentSlotType.FISHING_ROD, EnchantmentTarget.FISHING_ROD);
     }
 
     @Override
@@ -26,30 +75,7 @@ public class CraftEnchantment extends Enchantment {
 
     @Override
     public EnchantmentTarget getItemTarget() {
-        switch (target.slot) {
-        case ALL:
-            return EnchantmentTarget.ALL;
-        case ARMOR:
-            return EnchantmentTarget.ARMOR;
-        case ARMOR_FEET:
-            return EnchantmentTarget.ARMOR_FEET;
-        case ARMOR_HEAD:
-            return EnchantmentTarget.ARMOR_HEAD;
-        case ARMOR_LEGS:
-            return EnchantmentTarget.ARMOR_LEGS;
-        case ARMOR_TORSO:
-            return EnchantmentTarget.ARMOR_TORSO;
-        case DIGGER:
-            return EnchantmentTarget.TOOL;
-        case WEAPON:
-            return EnchantmentTarget.WEAPON;
-        case BOW:
-            return EnchantmentTarget.BOW;
-        case FISHING_ROD:
-            return EnchantmentTarget.FISHING_ROD;
-        default:
-            return null;
-        }
+        return enchantType.get(target.slot);
     }
 
     @Override
@@ -59,58 +85,13 @@ public class CraftEnchantment extends Enchantment {
 
     @Override
     public String getName() {
-        switch (target.id) {
-        case 0:
-            return "PROTECTION_ENVIRONMENTAL";
-        case 1:
-            return "PROTECTION_FIRE";
-        case 2:
-            return "PROTECTION_FALL";
-        case 3:
-            return "PROTECTION_EXPLOSIONS";
-        case 4:
-            return "PROTECTION_PROJECTILE";
-        case 5:
-            return "OXYGEN";
-        case 6:
-            return "WATER_WORKER";
-        case 7:
-            return "THORNS";
-        case 16:
-            return "DAMAGE_ALL";
-        case 17:
-            return "DAMAGE_UNDEAD";
-        case 18:
-            return "DAMAGE_ARTHROPODS";
-        case 19:
-            return "KNOCKBACK";
-        case 20:
-            return "FIRE_ASPECT";
-        case 21:
-            return "LOOT_BONUS_MOBS";
-        case 32:
-            return "DIG_SPEED";
-        case 33:
-            return "SILK_TOUCH";
-        case 34:
-            return "DURABILITY";
-        case 35:
-            return "LOOT_BONUS_BLOCKS";
-        case 48:
-            return "ARROW_DAMAGE";
-        case 49:
-            return "ARROW_KNOCKBACK";
-        case 50:
-            return "ARROW_FIRE";
-        case 51:
-            return "ARROW_INFINITE";
-        case 61:
-            return "LUCK";
-        case 62:
-            return "LURE";
-        default:
-            return "UNKNOWN_ENCHANT_" + target.id;
+        String name = enchantName.get(target.id);
+        
+        if(name == null) {
+        	name = "UNKNOWN_ENCHANT_" + target.id;
         }
+        
+        return name;
     }
 
     public static net.minecraft.server.Enchantment getRaw(Enchantment enchantment) {
