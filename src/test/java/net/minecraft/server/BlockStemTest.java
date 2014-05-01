@@ -1,29 +1,112 @@
 package net.minecraft.server;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class BlockStemTest {
+	public BlockStem blockStem = new BlockStem(Blocks.SOIL);
 
 	@Test
 	public void testTrueTrueTrueTrue() {
 		testWorld tester = new testWorld(true, true, true, true);
-		assertNotNull(tester);
-		BlockStem blockStem = new BlockStem(Blocks.SOIL);
-		assertTrue(blockStem.n(tester, 1, 1, 1) == 4.0F);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueTrueTrueFalse() {
 		testWorld tester = new testWorld(true, true, true, false);
-		assertNotNull(tester);
-		BlockStem blockStem = new BlockStem(Blocks.SOIL);
-		assertTrue(blockStem.n(tester, 1, 1, 1) == 4.0F);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+	}
+	
+	@Test
+	public void testTrueTrueFalseTrue() {
+		testWorld tester = new testWorld(true, true, false, true);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+	}
+	
+	@Test
+	public void testTrueFalseTrueTrue() {
+		testWorld tester = new testWorld(true, false, true, true);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseTrueTrueTrue() {
+		testWorld tester = new testWorld(false, true, true, true);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+	}
+	
+	@Test
+	public void testTrueTrueFalseFalse() {
+		testWorld tester = new testWorld(true, true, false, false);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+	}
+	
+	@Test
+	public void testTrueFalseTrueFalse() {
+		testWorld tester = new testWorld(true, false, true, false);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseTrueTrueFalse() {
+		testWorld tester = new testWorld(false, true, true, false);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+	}
+	
+	@Test
+	public void testTrueFalseFalseTrue() {
+		testWorld tester = new testWorld(true, false, false, true);
+		assertEquals(blockStem.n(tester, 1, 1, 1) , 10.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseTrueFalseTrue() {
+		testWorld tester = new testWorld(false, true, false, true);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseFalseTrueTrue() {
+		testWorld tester = new testWorld(false, false, true, true);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+	}
+	
+	@Test
+	public void testTrueFalseFalseFalse() {
+		testWorld tester = new testWorld(true, false, false, false);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseTrueFalseFalse() {
+		testWorld tester = new testWorld(false, true, false, false);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseFalseTrueFalse() {
+		testWorld tester = new testWorld(false, false, true, false);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseFalseFalseTrue() {
+		testWorld tester = new testWorld(false, false, false, true);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+	}
+	
+	@Test
+	public void testFalseFalseFalseFalse() {
+		testWorld tester = new testWorld(false, false, false, false);
+		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	private class testWorld extends World {
@@ -32,14 +115,10 @@ public class BlockStemTest {
 		private Block notSoilBlock = Blocks.LAVA;
 		private boolean testSoil;
 		private boolean emptyData;
-		private boolean flagAndFlag1;
-		private boolean flag2;
 		
 		private testWorld(boolean testSoil, boolean emptyData, boolean flagAndFlag1, boolean flag2) {
 			this.testSoil = testSoil;
 			this.emptyData = emptyData;
-			this.flagAndFlag1 = flagAndFlag1;
-			this.flag2 = flag2;
 			
 			ArrayList<Block> blocks = new ArrayList<Block>();
 			blocks.add(flag2?
