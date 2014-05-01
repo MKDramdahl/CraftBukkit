@@ -11,102 +11,102 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BlockCropsTest {
-	public BlockCrops blockStem = new BlockCrops();
+	public BlockCrops blockCrops = new BlockCrops();
 
 	@Test
 	public void testTrueTrueTrueTrue() {
 		testWorld tester = new testWorld(true, true, true, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueTrueTrueFalse() {
 		testWorld tester = new testWorld(true, true, true, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueTrueFalseTrue() {
 		testWorld tester = new testWorld(true, true, false, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueFalseTrueTrue() {
 		testWorld tester = new testWorld(true, false, true, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseTrueTrueTrue() {
 		testWorld tester = new testWorld(false, true, true, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueTrueFalseFalse() {
 		testWorld tester = new testWorld(true, true, false, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueFalseTrueFalse() {
 		testWorld tester = new testWorld(true, false, true, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseTrueTrueFalse() {
 		testWorld tester = new testWorld(false, true, true, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueFalseFalseTrue() {
 		testWorld tester = new testWorld(true, false, false, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1) , 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1) , 10.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseTrueFalseTrue() {
 		testWorld tester = new testWorld(false, true, false, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseFalseTrueTrue() {
 		testWorld tester = new testWorld(false, false, true, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	@Test
 	public void testTrueFalseFalseFalse() {
 		testWorld tester = new testWorld(true, false, false, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseTrueFalseFalse() {
 		testWorld tester = new testWorld(false, true, false, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 4.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 4.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseFalseTrueFalse() {
 		testWorld tester = new testWorld(false, false, true, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseFalseFalseTrue() {
 		testWorld tester = new testWorld(false, false, false, true);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	@Test
 	public void testFalseFalseFalseFalse() {
 		testWorld tester = new testWorld(false, false, false, false);
-		assertEquals(blockStem.n(tester, 1, 1, 1), 10.0F, 0.5);
+		assertEquals(blockCrops.n(tester, 1, 1, 1), 10.0F, 0.5);
 	}
 	
 	private class testWorld extends World {
