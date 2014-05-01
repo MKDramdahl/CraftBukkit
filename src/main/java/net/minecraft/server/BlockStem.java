@@ -89,7 +89,7 @@ public class BlockStem extends BlockPlant implements IBlockFragilePlantElement {
         world.setData(i, j, k, l, 2);
     }
 
-    private float n(World world, int i, int j, int k) {
+    float n(World world, int i, int j, int k) {
         float f = 1.0F;
         Block block = world.getType(i, j, k - 1);
         Block block1 = world.getType(i, j, k + 1);

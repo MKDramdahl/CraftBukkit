@@ -1,6 +1,7 @@
 package net.minecraft.server;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +11,22 @@ import org.junit.Test;
 public class BlockStemTest {
 
 	@Test
-	public void test() {
+	public void testTrueTrueTrueTrue() {
 		testWorld tester = new testWorld(true, true, true, true);
 		assertNotNull(tester);
+		BlockStem blockStem = new BlockStem(Blocks.SOIL);
+		assertTrue(blockStem.n(tester, 1, 1, 1) == 4.0F);
 	}
 	
-	private class testWorld extends World{
+	@Test
+	public void testTrueTrueTrueFalse() {
+		testWorld tester = new testWorld(true, true, true, false);
+		assertNotNull(tester);
+		BlockStem blockStem = new BlockStem(Blocks.SOIL);
+		assertTrue(blockStem.n(tester, 1, 1, 1) == 4.0F);
+	}
+	
+	private class testWorld extends World {
 		private HashMap<Integer, ArrayList<Block>> matrix = new HashMap<Integer, ArrayList<Block>>();
 		private Block soilBlock = Blocks.SOIL;
 		private Block notSoilBlock = Blocks.LAVA;
@@ -23,11 +34,13 @@ public class BlockStemTest {
 		private boolean emptyData;
 		private boolean flagAndFlag1;
 		private boolean flag2;
+		
 		private testWorld(boolean testSoil, boolean emptyData, boolean flagAndFlag1, boolean flag2) {
 			this.testSoil = testSoil;
 			this.emptyData = emptyData;
 			this.flagAndFlag1 = flagAndFlag1;
 			this.flag2 = flag2;
+			
 			ArrayList<Block> blocks = new ArrayList<Block>();
 			blocks.add(flag2?
 					new BlockStem(Blocks.LAVA):
@@ -51,7 +64,6 @@ public class BlockStemTest {
 			blocks3.add(Blocks.LAVA);
 			blocks3.add(Blocks.LAVA);
 			matrix.put(2, blocks3);
-			
 		}
 		
 		//GetType assumes that the first and third parameter x and y are going
@@ -66,7 +78,7 @@ public class BlockStemTest {
 		}
 		
 		@Override
-		public Block getType(int x, int z, int y){
+		public Block getType(int x, int z, int y) {
 			Block toReturn;
 			if(z!=1){
 				toReturn = testSoil?
@@ -102,5 +114,4 @@ public class BlockStemTest {
 			return null;
 		}
 	}
-
 }
